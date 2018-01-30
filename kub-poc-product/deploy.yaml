@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: kub-poc-product
-        image: poc/kub-poc-product:v1.2
+        image: kub-poc-product:v1.0
         ports:
         - containerPort: 8080
         - containerPort: 8081

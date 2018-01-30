@@ -1,0 +1,31 @@
+{
+  "name": "@qover/server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qover-me/backends/apis/server"
+  },
+  "author": "Cys Alexandre",
+  "license": "ISC",
+  "dependencies": {
+    "grpc": "^1.8.4",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.1",
+    "config": "^1.26.2",
+    "faker": "^4.1.0",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.3",
+    "nyc": "^11.2.1"
+  }
+}

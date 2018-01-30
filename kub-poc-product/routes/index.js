@@ -8,4 +8,8 @@ router.get('/', function (req, res, next) {
   });
 });
 
+router.get('/health', function(req, res, next) {
+  return res.sendStatus(200);
+});
+
 module.exports = router;

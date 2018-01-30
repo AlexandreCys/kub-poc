@@ -14,3 +14,9 @@ spec:
         image: poc/kub-poc-gateway:v2.2
         ports:
         - containerPort: 8080
+        livenessProbe:
+          initialDelaySeconds: 2
+          periodSeconds: 5
+          httpGet:
+            path: /health
+            port: 8080

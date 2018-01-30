@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kub-poc-admin-gateway-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: NodePort
+  selector:
+    app: kub-poc-admin-gateway

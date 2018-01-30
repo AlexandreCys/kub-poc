@@ -11,12 +11,20 @@ spec:
     spec:
       containers:
       - name: kub-poc-gateway
-        image: poc/kub-poc-gateway:v2.3
+        image: poc/kub-poc-gateway:v2.6
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - name: public-token
+          mountPath: "/tmp/public-token"
+          readOnly: true
         livenessProbe:
           initialDelaySeconds: 2
           periodSeconds: 5
           httpGet:
             path: /health
             port: 8080
+      volumes:
+      - name: public-token
+        secret:
+          secretName: public-token

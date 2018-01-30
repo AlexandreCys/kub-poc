@@ -5,6 +5,10 @@ metadata:
 spec:
   ports:
     - port: 80
+      name: open-api
       targetPort: 8080
+    - port: 81
+      name: admin-api
+      targetPort: 8081
   selector:
     app: kub-poc-product

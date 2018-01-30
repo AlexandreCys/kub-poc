@@ -11,9 +11,10 @@ spec:
     spec:
       containers:
       - name: kub-poc-product
-        image: poc/kub-poc-product:v1.1
+        image: poc/kub-poc-product:v1.2
         ports:
         - containerPort: 8080
+        - containerPort: 8081
         livenessProbe:
           initialDelaySeconds: 2
           periodSeconds: 5

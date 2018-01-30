@@ -8,6 +8,7 @@
 ## POC
 
 GatewayService <-- http --> ProductService
+
                <-- grpc --> SecurityService
 
 ## How to

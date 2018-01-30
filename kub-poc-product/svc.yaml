@@ -6,6 +6,5 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
-  type: NodePort
   selector:
     app: kub-poc-product

@@ -16,10 +16,12 @@ fs.readFile('/tmp/public-token/value', 'utf-8', (err, data) => {
 })
 
 router.get('/', function(req, res, next) {
+  console.log('----------------------------------------------------GET /: ');
+
   services.example1.exampleSimple()
   .sendMessage({value: 1})
   .then(res => {
-    console.log('Example1 CLIENT received simple message : ', res)
+    console.log('Example1 CLIENT received simple message : ', res);
 
     console.log('token', token);
     const url = `http://kub-poc-product-service.default.svc.cluster.local${req.originalUrl}`

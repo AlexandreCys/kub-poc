@@ -4,7 +4,7 @@ const grpc_promise = require('grpc-promise');
 const servers = [
   {
     name: 'example1',
-    ip:'http://kub-poc-security-service.default.svc.cluster.local',
+    ip:'kub-poc-security-service',
     port: '83',
     protoName: 'example1',
     protoPath: 'example1.proto',

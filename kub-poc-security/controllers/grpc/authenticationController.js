@@ -3,14 +3,14 @@ const authenticationsServices = require('../../services/authentications');
 /**
  * Auth by password method.
  * 
- * @param {string} call.request.username 
+ * @param {string} call.request.userName 
  * @param {string} call.request.password 
  * @param {string} call.request.type 
  */
 function password (call, callback) {
   console.log(`Identity::Controller::Password::${call.request}`);
 
-  return authenticationsServices.authenticationService.password(call.request.username, call.request.password, call.request.type)
+  return authenticationsServices.authenticationService.password(call.request.userName, call.request.password, call.request.type)
   .returns(token => callback(null, token))
   .catch(err => callback(err));
 }
@@ -23,17 +23,9 @@ function password (call, callback) {
 function jwt (call, callback) {
   console.log(`Identity::Controller::Jwt::${call.request}`);
 
-  if() {
-    return callback({
-      code: 400,
-      message: "invalid input",
-      status: grpc.status.INTERNAL
-    }); 
-  }
-
-  return callback(null, authenticationsServices.authenticationService.jwt(
-    call.request.jwt,
-  ));
+  return authenticationsServices.authenticationService.jwt(call.request.jwt, call.request.type)
+  .returns(token => callback(null, token))
+  .catch(err => callback(err));
 }
 
 /**
@@ -44,9 +36,9 @@ function jwt (call, callback) {
 function key (call, callback) {
   console.log(`Identity::Controller::Key::${call.request}`);
   
-  callback(null, authenticationsServices.authenticationService.key(
-    call.request.key 
-  ));
+  return authenticationsServices.authenticationService.key(call.request.key)
+  .returns(token => callback(null, token))
+  .catch(err => callback(err));
 }
 
 module.exports = {

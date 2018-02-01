@@ -37,6 +37,7 @@ DEPLOY_SECURITY_LOCATION=../../kub-poc-security
 
 ADMIN_TOKEN_LOCATION=../secrets/admin-key.yaml
 B2B_TOKEN_LOCATION=../secrets/b2b-key.yaml
+INTERNAL_TOKEN_LOCATION=../secrets/internal-key.yaml
 
 # Confirmation
 echo -e "\e[36m⚙ \e[32m> \e[34mService Gateway : ${DEPLOY_GATEWAY_NAME} \e[39m"
@@ -80,6 +81,7 @@ if [ "$CONT" = "y" ]; then
   echo -e "\e[36m⚙ Begin kubectl create secrets \e[39m"
   kubectl create -f $ADMIN_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
   kubectl create -f $B2B_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
+  kubectl create -f INTERNAL_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
 
   # KubeCtl create all deploy
   echo -e "\e[36m⚙ Begin kubectm create all deploy \e[39m"

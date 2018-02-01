@@ -4,7 +4,7 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,11 +17,10 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.1",
     "config": "^1.26.2",
-    "faker": "^4.1.0",
     "fs": "0.0.1-security",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
-    "jwt": "^0.2.0",
+    "jsonwebtoken": "^8.0.1",
     "moment-timezone": "^0.5.13",
     "morgan": "^1.8.2",
     "mongoose": "^4.11.10"

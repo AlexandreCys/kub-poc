@@ -35,7 +35,8 @@ DEPLOY_GATEWAY_LOCATION=../../kub-poc-gateway
 DEPLOY_PRODUCT_LOCATION=../../kub-poc-jobloss
 DEPLOY_SECURITY_LOCATION=../../kub-poc-security
 
-SECRET_TOKEN_LOCATION=../secrets/public-token.yaml
+ADMIN_TOKEN_LOCATION=../secrets/admin-key.yaml
+B2B_TOKEN_LOCATION=../secrets/b2b-key.yaml
 
 # Confirmation
 echo -e "\e[36m⚙ \e[32m> \e[34mService Gateway : ${DEPLOY_GATEWAY_NAME} \e[39m"
@@ -77,7 +78,8 @@ if [ "$CONT" = "y" ]; then
 
   # KubeCtl create secret
   echo -e "\e[36m⚙ Begin kubectl create secrets \e[39m"
-  kubectl create -f $SECRET_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
+  kubectl create -f $ADMIN_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
+  kubectl create -f $B2B_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
 
   # KubeCtl create all deploy
   echo -e "\e[36m⚙ Begin kubectm create all deploy \e[39m"

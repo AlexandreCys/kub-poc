@@ -12,5 +12,19 @@ spec:
       containers:
       - name: kub-poc-security
         image: k8s/kub-poc-security:v<VERSION>
+        volumeMounts:
+        - name: admin-key
+          mountPath: "/tmp/admin-key"
+          readOnly: true
+        - name: b2b-key
+          mountPath: "/tmp/b2b-key"
+          readOnly: true
         ports:
         - containerPort: 8083
+      volumes:
+      - name: admin-key
+        secret:
+          secretName: admin-key
+      - name: b2b-key
+        secret:
+          secretName: b2b-key

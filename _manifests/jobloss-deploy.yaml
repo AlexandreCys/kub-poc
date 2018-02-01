@@ -1,20 +1,19 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: kub-poc-product-deploy
+  name: kub-poc-jobloss-deploy
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: kub-poc-product
+        app: kub-poc-jobloss
     spec:
       containers:
-      - name: kub-poc-product
-        image: kub-poc-product:v1.0
+      - name: kub-poc-jobloss
+        image: k8s/kub-poc-jobloss:v1.0
         ports:
         - containerPort: 8080
-        - containerPort: 8081
         livenessProbe:
           initialDelaySeconds: 2
           periodSeconds: 5

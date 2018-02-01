@@ -1,9 +1,9 @@
 {
-  "name": "kub-poc-product",
+  "name": "kub-poc-jobloss",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www & node ./bin/admin"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

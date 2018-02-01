@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: kub-poc-gateway
-        image: poc/kub-poc-gateway:v1.1
+        image: k8s/kub-poc-gateway:v1.1
         ports:
         - containerPort: 8080
         volumeMounts:

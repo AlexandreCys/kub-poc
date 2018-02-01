@@ -1,14 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kub-poc-product-service
+  name: kub-poc-jobloss-service
 spec:
   ports:
     - port: 80
       name: open-api
       targetPort: 8080
-    - port: 81
-      name: admin-api
-      targetPort: 8081
   selector:
-    app: kub-poc-product
+    app: kub-poc-jobloss

@@ -4,7 +4,7 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,10 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.1",
     "config": "^1.26.2",
+    "express": "~4.15.5",
     "fs": "0.0.1-security",
     "lodash": "^4.17.4",
+    "cookie-parser": "~1.4.3",
     "moment": "^2.18.1",
     "jsonwebtoken": "^8.0.1",
     "moment-timezone": "^0.5.13",

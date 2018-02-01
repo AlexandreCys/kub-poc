@@ -1,4 +1,5 @@
 const config = {
+  port: '7070',
   server: {
       name: 'authentication',
       ip:'0.0.0.0',

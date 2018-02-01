@@ -1,18 +1,28 @@
 const url = require('url');
+const config = require('config');
 const querystring = require('querystring');
 const request = require('request');
 
 const authenticationMode = {
     apiKey: 'apiKey',
     b2bUser: 'b2bUser', // dashboard user
-    adminUser: 'adminUser' // ninja backoffice
-}
+    adminUser: 'adminUser', // ninja backoffice
+};
 
-const gatewayConfiguration = [{
+const gatewayConfiguration = [
+    {
+        originalUrl: '/auth',
+        to: {
+            service: config.service.security.add,
+            port: config.service.security.port.http,
+        }
+    },
+    {
         originalUrl: '/be/jobloss',
         authenticationModes: [authenticationMode.apiKey, authenticationMode.b2bUser],
         to: {
-            service: 'kub-poc-jobloss-service',
+            service: config.service.jobloss.add,
+            port: config.service.jobloss.port.http,
             postfix: '/be'
         }
     },
@@ -20,7 +30,8 @@ const gatewayConfiguration = [{
         originalUrl: '/admin/jobloss',
         authenticationModes: [authenticationMode.adminUser],
         to: {
-            service: 'kub-poc-jobloss-service',
+            service: config.service.jobloss.add,
+            port: config.service.jobloss.port.http,
             postfix: '/admin'
         }
     }
@@ -38,12 +49,32 @@ function gateway(req, res, next) {
     try {
         const gatewayConfig = findGatewayConfig(originalUrl);
         const authorizationToken = extractAuthorization(req, gatewayConfig);
-        const requestOptions = buildRequestForGatewayConfig(originalUrl, req.query, req.headers, gatewayConfig, authorizationToken);
+
+        const requestOptions = buildRequestForGatewayConfig(originalUrl, 
+            req.method, 
+            req.body, 
+            req.query, 
+            req.headers, 
+            gatewayConfig, 
+            authorizationToken
+        );
 
         console.log('gateway::', 'extracted token', authorizationToken);
         console.log('gateway::', 'calling', requestOptions.url);
 
-        return req.pipe(request(requestOptions)).pipe(res);
+        //return req.pipe(request(requestOptions)).pipe(res);
+
+        console.log(requestOptions);
+
+        request(requestOptions, function (error, response, body) {
+            if (!error) {
+                res.write(response.statusCode);
+            } else {
+                //response.end(error);
+                res.write(error);
+            }
+            res.end( );
+        });
     } catch (err) {
         return next(err);
     }
@@ -79,11 +110,13 @@ function findGatewayConfig(originalUrl) {
  * @param {any} authorizationToken 
  * @returns 
  */
-function buildRequestForGatewayConfig(originalUrl, queryStrings, headers, gatewayConfig, authorizationToken) {
+function buildRequestForGatewayConfig(originalUrl, method, body, queryStrings, headers, gatewayConfig, authorizationToken) {
     const url = buildUrl(originalUrl, queryStrings, gatewayConfig);
 
     let requestOptions = {
         url,
+        method,
+        body: JSON.stringify(body),
         headers,
     };
 
@@ -117,7 +150,9 @@ function buildUrl(originalUrl, queryStrings, gatewayConfig) {
 
     const queryString = querystring.stringify(queryStrings);
 
-    return `http://${gatewayConfig.to.service}.default.svc.cluster.local${mappedPostfixUrl}${postfixUrl}?${queryString}`;
+    //return `http://${gatewayConfig.to.service}.default.svc.cluster.local${mappedPostfixUrl}${postfixUrl}?${queryString}`;
+    console.log(`http://${gatewayConfig.to.service}:${gatewayConfig.to.port}${mappedPostfixUrl}${postfixUrl}?${queryString}`);
+    return `http://${gatewayConfig.to.service}:${gatewayConfig.to.port}${mappedPostfixUrl}${postfixUrl}?${queryString}`;
 }
 
 /**
@@ -129,7 +164,7 @@ function buildUrl(originalUrl, queryStrings, gatewayConfig) {
  */
 function extractAuthorization(req, gatewayConfig) {
     // access with a JWT token
-    if (gatewayConfig.authenticationModes.includes(authenticationMode.adminUser) && req.token) {
+    if (gatewayConfig.authenticationModes && gatewayConfig.authenticationModes.includes(authenticationMode.adminUser) && req.token) {
         // remove original header
         delete req.headers.Authorization;
 
@@ -139,7 +174,8 @@ function extractAuthorization(req, gatewayConfig) {
         };
     }
 
-    if (gatewayConfig.authenticationModes.includes(authenticationMode.b2bUser) && req.token) {
+    // access with a JWT token
+    if (gatewayConfig.authenticationModes && gatewayConfig.authenticationModes.includes(authenticationMode.b2bUser) && req.token) {
         // remove original header
         delete req.headers.Authorization;
 
@@ -150,7 +186,7 @@ function extractAuthorization(req, gatewayConfig) {
     }
 
     // access with an api key
-    if (gatewayConfig.authenticationModes.includes(authenticationMode.apiKey)) {
+    if (gatewayConfig.authenticationModes && gatewayConfig.authenticationModes.includes(authenticationMode.apiKey)) {
         if (req.query['apikey']) {
             delete req.query['apikey'];
 

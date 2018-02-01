@@ -4,7 +4,7 @@ const grpc_promise = require('grpc-promise');
 let clientInstance = null;
 
 function init() {
-  const protoPath = __dirname + '/../../contracts/authentication.proto';
+  const protoPath = __dirname + '/contracts/authentication.proto';
   const proto = grpc.load(protoPath)['authentication']; // load pacakage
 
   createClient(proto);

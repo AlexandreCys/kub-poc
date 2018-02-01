@@ -17,6 +17,7 @@ service Authentication {
 message PasswordRequest {
    string username = 1;
    string passsword = 2;
+   string type = 3;
 }
 
 message JwtRequest {

@@ -1,17 +1,34 @@
 syntax = "proto3";
 
-package example1;
+package authentication;
 
-service Example1 {
+service Authentication {
 
-   rpc exampleSimple (ExampleRequest) returns (ExampleResponse) {}
+   rpc password (PasswordRequest) returns (Response) {}
+
+
+   rpc jwt (JwtRequest) returns (Response) {}
+
+
+   rpc key (KeyRequest) returns (Response) {}
 
 }
 
-message ExampleRequest {
-   int32 value = 1;
+message PasswordRequest {
+   string username = 1;
+   string passsword = 2;
+   string type = 3;
 }
 
-message ExampleResponse {
-   int32 value = 1;
+message JwtRequest {
+  string jwt = 1;
+}
+
+message KeyRequest {
+  string key = 1;
+}
+
+message Response {
+   string llToken = 1;
+   string slToken = 2;
 }

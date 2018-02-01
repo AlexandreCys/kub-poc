@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: kub-poc-security
-        image: poc/kub-poc-security:v1.0
+        image: k8s/kub-poc-security:v<VERSION>
         ports:
         - containerPort: 8083

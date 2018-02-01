@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package authentication;
+
+service Authentication {
+
+   rpc password (PasswordRequest) returns (Response) {}
+
+
+   rpc jwt (JwtRequest) returns (Response) {}
+
+
+   rpc key (KeyRequest) returns (Response) {}
+
+}
+
+message PasswordRequest {
+   string username = 1;
+   string passsword = 2;
+}
+
+message JwtRequest {
+  string jwt = 1;
+}
+
+message KeyRequest {
+  string key = 1;
+}
+
+message Response {
+   string llToken = 1;
+   string slToken = 2;
+}

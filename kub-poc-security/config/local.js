@@ -8,16 +8,16 @@ const config = {
   },
   key: {
     adminUser : {
-      public: '/tmp/admin-key/public',
-      private: '/tmp/admin-key/private',
+      public: './tmp/admin-key/public',
+      private: './tmp/admin-key/private',
     },
     b2bUser : {
-      public: '/tmp/b2b-key/public',
-      private: '/tmp/b2b-key/private',
+      public: './tmp/b2b-key/public',
+      private: './tmp/b2b-key/private',
     },
     internal : {
-      public: '/tmp/internal-key/public',
-      private: '/tmp/internal-key/private',
+      public: './tmp/internal-key/public',
+      private: './tmp/internal-key/private',
     },
   },
   mongo: 'mongodb://localhost:27017/authentication',

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
@@ -6,20 +7,20 @@ const conf = {
   adminUser:  {
     val: 6,
     uni: 'months',
-    privateKey: fs.readFileSync('/tmp/admin-key/private', "utf8"),
-    publicKey: fs.readFileSync('/tmp/admin-key/public', "utf8"),
+    privateKey: fs.readFileSync(config.key.adminUser.private, "utf8"),
+    publicKey: fs.readFileSync(config.key.adminUser.public, "utf8"),
   },
   b2bUser:  {
     val: 6,
     uni: 'months',
-    privateKey: fs.readFileSync('/tmp/b2b-key/private', "utf8"),
-    publicKey: fs.readFileSync('/tmp/b2b-key/public', "utf8"),
+    privateKey: fs.readFileSync(config.key.b2bUser.private, "utf8"),
+    publicKey: fs.readFileSync(config.key.b2bUser.public, "utf8"),
   },
   internal:  {
     val: 1,
     uni: 'mins',
-    privateKey: fs.readFileSync('/tmp/internal-key/private', "utf8"),
-    publicKey: fs.readFileSync('/tmp/internal-key/public', "utf8"),
+    privateKey: fs.readFileSync(config.key.internal.private, "utf8"),
+    publicKey: fs.readFileSync(config.key.internal.public, "utf8"),
   },
 };
 

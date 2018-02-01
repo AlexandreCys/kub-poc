@@ -15,13 +15,14 @@ service Authentication {
 }
 
 message PasswordRequest {
-   string username = 1;
-   string passsword = 2;
+   string userName = 1;
+   string password = 2;
    string type = 3;
 }
 
 message JwtRequest {
   string jwt = 1;
+  string type = 2;
 }
 
 message KeyRequest {

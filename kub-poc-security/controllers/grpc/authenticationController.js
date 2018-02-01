@@ -8,10 +8,10 @@ const authenticationsServices = require('../../services/authentications');
  * @param {string} call.request.type 
  */
 function password (call, callback) {
-  console.log(`Identity::Controller::Password::${call.request}`);
+  console.log(`Identity::Controller::Password::${JSON.stringify(call.request)}`);
 
   return authenticationsServices.authenticationService.password(call.request.userName, call.request.password, call.request.type)
-  .returns(token => callback(null, token))
+  .then(token => callback(null, token))
   .catch(err => callback(err));
 }
 
@@ -21,10 +21,10 @@ function password (call, callback) {
  * @param {string} call.request.jwt 
  */
 function jwt (call, callback) {
-  console.log(`Identity::Controller::Jwt::${call.request}`);
+  console.log(`Identity::Controller::Jwt::${JSON.stringify(call.request)}`);
 
   return authenticationsServices.authenticationService.jwt(call.request.jwt, call.request.type)
-  .returns(token => callback(null, token))
+  .then(token => callback(null, token))
   .catch(err => callback(err));
 }
 
@@ -34,10 +34,10 @@ function jwt (call, callback) {
  * @param {string} call.request.key 
  */
 function key (call, callback) {
-  console.log(`Identity::Controller::Key::${call.request}`);
+  console.log(`Identity::Controller::Key::${JSON.stringify(call.request)}`);
   
   return authenticationsServices.authenticationService.key(call.request.key)
-  .returns(token => callback(null, token))
+  .then(token => callback(null, token))
   .catch(err => callback(err));
 }
 

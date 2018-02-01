@@ -16,7 +16,7 @@ service Authentication {
 
 message PasswordRequest {
    string userName = 1;
-   string passsword = 2;
+   string password = 2;
    string type = 3;
 }
 

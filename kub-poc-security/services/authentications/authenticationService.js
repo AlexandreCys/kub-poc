@@ -10,11 +10,15 @@ const jwtService = require('../../infrastructure/jwt/jwtService');
  * @return {jwt}
  */
 function password (userName, password, type) {
-  console.log(`Identity::Service::Password::${call.request}`);
+  console.log(`Identity::Service::Password::${JSON.stringify({userName, password, type})}`);
 
   return new Promise((resolve, reject) => {
 
-    //CHECK login/password
+    //FAKE CHECK login/password
+    if(userName !== 'acy' || password !== '1234') {
+      return reject(grpcErrors.unauthorized);
+    }
+    //FAKE CHECK login/password
 
     return resolve(jwtService.sign({
       permissions : [],
@@ -31,11 +35,15 @@ function password (userName, password, type) {
  * @return {jwt}
  */
 function jwt (jwt, type) {
-  console.log(`Identity::Service::Jwt::${call.request}`);
+  console.log(`Identity::Service::Jwt::${JSON.stringify({jwt, type})}`);
 
   return new Promise((resolve, reject) => {
     
-    //CHECK jwt
+    //FAKE CHECK jwt
+    if(jwt !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ') {
+      return reject(grpcErrors.unauthorized);
+    }
+    //FAKE CHECK jwt
 
     return resolve(jwtService.sign({
       permissions : [],
@@ -52,11 +60,15 @@ function jwt (jwt, type) {
  * @return {jwt}
  */
 function key (key) {
-  console.log(`Identity::Service::Key::${call.request}`);
+  console.log(`Identity::Service::Key::${JSON.stringify({key})}`);
   
   return new Promise((resolve, reject) => {
     
-    //CHECK key
+    //FAKE CHECK key
+    if(key !== 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') {
+      return reject(grpcErrors.unauthorized);
+    }
+    //FAKE CHECK jwt
 
     return resolve(jwtService.sign({
       permissions : [],

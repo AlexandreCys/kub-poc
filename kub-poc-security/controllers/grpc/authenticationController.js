@@ -5,14 +5,14 @@ const authenticationsServices = require('../../services/authentications');
  * 
  * @param {string} call.request.username 
  * @param {string} call.request.password 
+ * @param {string} call.request.type 
  */
 function password (call, callback) {
   console.log(`Identity::Controller::Password::${call.request}`);
 
-  callback(null, authenticationsServices.authenticationService.password(
-    call.request.username,
-    call.request.password
-  ));
+  return authenticationsServices.authenticationService.password(call.request.username, call.request.password, call.request.type)
+  .returns(token => callback(null, token))
+  .catch(err => callback(err));
 }
 
 /**
@@ -23,8 +23,16 @@ function password (call, callback) {
 function jwt (call, callback) {
   console.log(`Identity::Controller::Jwt::${call.request}`);
 
-  callback(null, authenticationsServices.authenticationService.jwt(
-    call.request.jwt
+  if() {
+    return callback({
+      code: 400,
+      message: "invalid input",
+      status: grpc.status.INTERNAL
+    }); 
+  }
+
+  return callback(null, authenticationsServices.authenticationService.jwt(
+    call.request.jwt,
   ));
 }
 

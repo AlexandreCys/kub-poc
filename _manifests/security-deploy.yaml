@@ -19,6 +19,9 @@ spec:
         - name: b2b-key
           mountPath: "/tmp/b2b-key"
           readOnly: true
+        - name: internal-key
+          mountPath: "/tmp/internal-key"
+          readOnly: true
         ports:
         - containerPort: 8083
       volumes:
@@ -28,3 +31,6 @@ spec:
       - name: b2b-key
         secret:
           secretName: b2b-key
+      - name: internal-key
+        secret:
+          secretName: internal-key    

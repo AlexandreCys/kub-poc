@@ -28,11 +28,11 @@ fi
 K8S_NAMESPACE=k8s
 
 DEPLOY_GATEWAY_NAME=k8s/kub-poc-gateway:v$VERSION
-DEPLOY_PRODUCT_NAME=k8s/kub-poc-product:v$VERSION
+DEPLOY_PRODUCT_NAME=k8s/kub-poc-jobloss:v$VERSION
 DEPLOY_SECURITY_NAME=k8s/kub-poc-security:v$VERSION
 
 DEPLOY_GATEWAY_LOCATION=../../kub-poc-gateway
-DEPLOY_PRODUCT_LOCATION=../../kub-poc-product
+DEPLOY_PRODUCT_LOCATION=../../kub-poc-jobloss
 DEPLOY_SECURITY_LOCATION=../../kub-poc-security
 
 SECRET_TOKEN_LOCATION=../secrets/public-token.yaml
@@ -71,6 +71,10 @@ if [ "$CONT" = "y" ]; then
   echo -e "\e[36m⚙ Begin kubectl clean all services \e[39m"
   kubectl delete --all services --namespace=$K8S_NAMESPACE
 
+  # KubeCtl delete all secrets
+  echo -e "\e[36m⚙ Begin kubectl clean all secrets \e[39m"
+  kubectl delete --all secrets --namespace=$K8S_NAMESPACE
+
   # KubeCtl create secret
   echo -e "\e[36m⚙ Begin kubectl create secrets \e[39m"
   kubectl create -f $SECRET_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
@@ -80,8 +84,8 @@ if [ "$CONT" = "y" ]; then
   sed "s/<VERSION>/$VERSION/" ../gateway-deploy.yaml > /tmp/gateway-deploy.yaml
   kubectl create -f /tmp/gateway-deploy.yaml --namespace=$K8S_NAMESPACE
 
-  sed "s/<VERSION>/$VERSION/" ../product-jobloss-deploy.yaml > /tmp/product-jobloss-deploy.yaml
-  kubectl create -f /tmp/product-jobloss-deploy.yaml --namespace=$K8S_NAMESPACE
+  sed "s/<VERSION>/$VERSION/" ../jobloss-deploy.yaml > /tmp/jobloss-deploy.yaml
+  kubectl create -f /tmp/jobloss-deploy.yaml --namespace=$K8S_NAMESPACE
 
   sed "s/<VERSION>/$VERSION/" ../security-deploy.yaml > /tmp/security-deploy.yaml
   kubectl create -f /tmp/security-deploy.yaml --namespace=$K8S_NAMESPACE
@@ -89,7 +93,7 @@ if [ "$CONT" = "y" ]; then
   # KubeCtl create all services
   echo -e "\e[36m⚙ Begin kubectm clean all services \e[39m"
   kubectl create -f ../gateway-svc.yaml --namespace=$K8S_NAMESPACE
-  kubectl create -f ../product-jobloss-svc.yaml --namespace=$K8S_NAMESPACE
+  kubectl create -f ../jobloss-svc.yaml --namespace=$K8S_NAMESPACE
   kubectl create -f ../security-svc.yaml --namespace=$K8S_NAMESPACE
 
   echo -e "\e[32m✔ Successful deployment \e[39m"

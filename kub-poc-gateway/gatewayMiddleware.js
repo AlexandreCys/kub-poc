@@ -17,6 +17,10 @@ const gatewayMapping = [{
 ];
 
 function gateway(req, res, next) {
+    if(req.originalUrl === '/health'){
+        return res.sendStatus(200);
+    }
+
     console.log('gateway::', 'received request for', req.originalUrl);
 
     const mappedUrl = gatewayMapping.find(x => req.originalUrl.startsWith(x.originalUrl));
@@ -36,7 +40,7 @@ function gateway(req, res, next) {
 
     console.log('gateway::', 'calling', url);
 
-    return res.status(200).json({});
+    return req.pipe(request(url)).pipe(res);  
 };
 
 function buildUrl(originalUrl, gatewayMappedUrl) {

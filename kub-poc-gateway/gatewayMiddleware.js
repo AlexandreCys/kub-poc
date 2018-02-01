@@ -3,14 +3,14 @@ const request = require('request');
 const gatewayMapping = [{
         originalUrl: '/be/jobloss',
         to: {
-            service: 'kub-poc-product-service',
+            service: 'kub-poc-jobloss-service',
             postfix: '/be'
         }
     },
     {
         originalUrl: '/admin/jobloss',
         to: {
-            service: 'kub-poc-product-service',
+            service: 'kub-poc-jobloss-service',
             postfix: '/admin'
         }
     }

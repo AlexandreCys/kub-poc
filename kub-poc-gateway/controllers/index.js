@@ -16,21 +16,19 @@ fs.readFile('/tmp/public-token/value', 'utf-8', (err, data) => {
 })
 
 router.get('/', function(req, res, next) {
-  console.log('----------------------------------------------------GET /: ');
+  // console.log('----------------------------------------------------GET /: ');
 
-  services.example1.exampleSimple()
-  .sendMessage({value: 1})
-  .then(data => {
-    console.log('Example1 CLIENT received simple message : ', data);
+  // services.example1.exampleSimple()
+  // .sendMessage({value: 1})
+  // .then(data => {
+  //   console.log('Example1 CLIENT received simple message : ', data);
 
-    console.log('token', token);
-    const url = `http://kub-poc-product-service.default.svc.cluster.local${req.originalUrl}`
-    console.log(`Calling ${url} ...`);
+  //   console.log('token', token);
+  //   const url = `http://kub-poc-product-service.default.svc.cluster.local${req.originalUrl}`
+  //   console.log(`Calling ${url} ...`);
     return req.pipe(request(url)).pipe(res);  
-  })
-  .catch(err => console.error(err));
-
-
+  // })
+  // .catch(err => console.error(err));
 });
 
 router.get('/health', function(req, res, next) {

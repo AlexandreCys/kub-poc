@@ -14,7 +14,7 @@ router.post('/login', (req, res, next) => {
   .then(token => 
     res.json({ token })
   )
-  .catch(err => next(err));
+  .catch(err => res.status(401).send('Unauthorized'))
 });
 
 module.exports = router;

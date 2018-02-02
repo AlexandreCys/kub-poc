@@ -1,21 +1,6 @@
 const authenticationsServices = require('../../services/authentications');
 
 /**
- * Auth by password method.
- * 
- * @param {string} call.request.userName 
- * @param {string} call.request.password 
- * @param {string} call.request.type 
- */
-function password (call, callback) {
-  console.log(`Identity::Controller::Password::${JSON.stringify(call.request)}`);
-
-  return authenticationsServices.authenticationService.password(call.request.userName, call.request.password, call.request.type)
-  .then(token => callback(null, token))
-  .catch(err => callback(err));
-}
-
-/**
  * Auth by jwt method.
  * 
  * @param {string} call.request.jwt 
@@ -42,7 +27,6 @@ function key (call, callback) {
 }
 
 module.exports = {
-  password,
   jwt,
   key,
 };

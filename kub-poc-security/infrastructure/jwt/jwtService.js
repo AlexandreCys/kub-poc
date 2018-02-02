@@ -52,7 +52,7 @@ function verify(token, userType) {
   return jwt.verify(token, keys.publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
     if (err) { return false; }
 
-    return true;
+    return decoded;
   });
 }
 

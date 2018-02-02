@@ -4,20 +4,11 @@ package authentication;
 
 service Authentication {
 
-   rpc password (PasswordRequest) returns (ResponseLL) {}
-
-
    rpc jwt (JwtRequest) returns (ResponseSL) {}
 
 
    rpc key (KeyRequest) returns (ResponseSL) {}
 
-}
-
-message PasswordRequest {
-   string userName = 1;
-   string password = 2;
-   string type = 3;
 }
 
 message JwtRequest {

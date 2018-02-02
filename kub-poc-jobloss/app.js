@@ -1,9 +1,13 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const middlewares = require('./middlewares');
 const contractController = require('./controllers/http/contractController');
 
 global.Promise = require('bluebird');
+
+passport.use(middlewares.jwtSecurityMiddleware);
 
 const app = express();
 

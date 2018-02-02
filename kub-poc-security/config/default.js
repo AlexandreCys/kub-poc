@@ -21,7 +21,6 @@ const config = {
       private: '/tmp/internal-key/private',
     },
   },
-  mongo: 'mongodb://localhost:27017/authentication',
 };
 
 module.exports = config;

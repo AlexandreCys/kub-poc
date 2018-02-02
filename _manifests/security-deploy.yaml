@@ -33,4 +33,10 @@ spec:
           secretName: b2b-key
       - name: internal-key
         secret:
-          secretName: internal-key    
+          secretName: internal-key
+      livenessProbe:
+        initialDelaySeconds: 2
+        periodSeconds: 5
+        httpGet:
+          path: /health
+          port: 8080 

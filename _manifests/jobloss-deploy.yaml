@@ -12,8 +12,16 @@ spec:
       containers:
       - name: kub-poc-jobloss
         image: k8s/kub-poc-jobloss:v<VERSION>
+        volumeMounts:
+        - name: internal-key
+          mountPath: "/tmp/internal-key"
+          readOnly: true
         ports:
         - containerPort: 8080
+        volumes:
+        - name: internal-key
+          secret:
+            secretName: internal-key
         livenessProbe:
           initialDelaySeconds: 2
           periodSeconds: 5

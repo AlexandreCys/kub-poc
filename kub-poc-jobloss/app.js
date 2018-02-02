@@ -9,8 +9,6 @@ global.Promise = require('bluebird');
 
 passport.use(middlewares.jwtSecurityMiddleware);
 
-const app = express();
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

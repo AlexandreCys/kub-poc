@@ -34,6 +34,7 @@ const jwtPayloadJsonSchema = {
 };
 
 const strategy = new JwtStrategy(jwtOptions, (jwtPayload, next) => {
+  console.log(validate(jwtPayload, jwtPayloadJsonSchema));
   if (!jwtPayload || validate(jwtPayload, jwtPayloadJsonSchema).errors.length) {
     return next(false);
   }

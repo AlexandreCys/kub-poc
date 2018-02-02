@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const controllers = require('./controllers/http/authenticationController');
+const authenticationController = require('./controllers/http/authenticationController');
 
 global.Promise = require('bluebird');
 
@@ -12,7 +12,7 @@ require('./infrastructure/grpc/factories/serverFactory').init();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('/', controllers);
+app.use('/', authenticationController);
 
 app.use(function (err, req, res, next) {
   console.error(err);

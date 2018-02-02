@@ -10,20 +10,31 @@ const jwtService = require('../../infrastructure/jwt/jwtService');
  * @return {jwt}
  */
 function password (userName, password, type) {
-  console.log(`Identity::Service::Password::${JSON.stringify({userName, password, type})}`);
+  console.log(`[HTTP]SECURITY::Service::Password::${JSON.stringify({ userName, password, type })}`);
+
+  let permissions = [];
+  let partners = [];
+  let isAdmin = false;
 
   return new Promise((resolve, reject) => {
-
     //FAKECHECK : login/password
-    if(userName !== 'acy' || password !== '1234') {
+    if(userName === 'acy' && password === '1234') {
+      permissions = ['jobloss.'];
+      partners = [];
+      isAdmin = [];
+    } else if(userName === 'cde' && password === '1234') {
+      permissions = [];
+      partners = [];
+      isAdmin = [];
+    } else {
       return reject(grpcErrors.unauthorized);
     }
     //FAKECHECK : login/password
 
     return resolve(jwtService.sign({
-      permissions : [],
-      partners : [],
-      isAdmin : false,
+      permissions,
+      partners,
+      isAdmin,
     }, type));
   });
 }
@@ -35,7 +46,7 @@ function password (userName, password, type) {
  * @return {jwt}
  */
 function jwt (jwt, type) {
-  console.log(`Identity::Service::Jwt::${JSON.stringify({jwt, type})}`);
+  console.log(`[HTTP]SECURITY::Service::Jwt::${JSON.stringify({ jwt, type })}`);
 
   return new Promise((resolve, reject) => {
     
@@ -60,7 +71,7 @@ function jwt (jwt, type) {
  * @return {jwt}
  */
 function key (key) {
-  console.log(`Identity::Service::Key::${JSON.stringify({key})}`);
+  console.log(`[HTTP]SECURITY::Service::Key::${JSON.stringify({ key })}`);
   
   return new Promise((resolve, reject) => {
     

@@ -1,16 +1,17 @@
 # Poc with kubernetes
 
-## prerequisistes
+## Prerequisistes
 
 - Minikube
 - Docker
 
 ## POC
 
+```
 GatewayService <-- http --> ProductService
 
                <-- grpc --> SecurityService
-
+```
 ## How to
 
 1. use minikube docker 
@@ -22,9 +23,15 @@ GatewayService <-- http --> ProductService
 ``` kubectl create -f svc.yaml ```
 5. Get your Kubernetes node IP: ``` kubectl cluster-info ``` and use the service NodePort to connect to your service
 
-## usefull commands
+## Usefull commands
 
 - ``` kubectl get pods ``` list all the pods
 - ``` kubectl describe pod xyz ``` show info for a pod
 - ``` kubectl get services ```
 - ``` kubectl describe service xyz ```
+
+## Build k8s
+
+```
+./deployment/desploy.sh 0.1
+```

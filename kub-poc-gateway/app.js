@@ -1,18 +1,18 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
+const gatewayConfigurations = require('./models/gatewayConfigurations');
 
-var gatewayMiddleware = require('./gatewayMiddleware');
+const middlewares = require('./middlewares');
+
+var gatewayMiddleware = require('./proxyMiddleware');
 
 var app = express();
 
 require('./infrastructure/securityService/authenticationService').init();
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
@@ -20,8 +20,10 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 app.use(bearerToken());
+app.use(middlewares.gatewayConfigMiddleware);
+app.use(middlewares.authorizationMiddleware);
 
-app.use(gatewayMiddleware);
+gatewayConfigurations.forEach(x => app.use(x.originalUrl, middlewares.gatewayConfigurationProxyMiddleware(x)));
 
 // error handler
 app.use(function (err, req, res, next) {

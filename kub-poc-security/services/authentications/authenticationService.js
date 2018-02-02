@@ -4,22 +4,34 @@ const jwtService = require('../../infrastructure/jwt/jwtService');
 
 const identity = {
   1: {
-    idIdentity : 1,
-    permissions : ['jobloss.contract.delete'],
-    partners : [1],
-    isAdmin : false,
+    idIdentity: 1,
+    permissions: ['jobloss.contract.delete'],
+    partners: [1],
+    isAdmin: false,
   },
   2: {
-    idIdentity : 2,
-    permissions : ['jobloss.contract.delete'],
-    partners : [],
-    isAdmin : true,
+    idIdentity: 2,
+    permissions: ['jobloss.contract.delete'],
+    partners: ['*'],
+    isAdmin: true,
   },
   3: {
-    idIdentity : 3,
-    permissions : [],
-    partners : [],
-    isAdmin : true,
+    idIdentity: 3,
+    permissions: [],
+    partners: [1],
+    isAdmin: true,
+  },
+  4: {
+    idIdentity: 4,
+    permissions: ['jobloss.contract.delete'],
+    partners: [1],
+    isAdmin: true,
+  },
+  5: {
+    idIdentity: 5,
+    permissions: ['jobloss.contract.delete'],
+    partners: [2],
+    isAdmin: true,
   },
 }
 
@@ -32,7 +44,7 @@ const identity = {
  * @param {string} type
  * @return {jwt}
  */
-function password (userName, password, type) {
+function password(userName, password, type) {
   console.log(`[HTTP]SECURITY::Service::Password::${JSON.stringify({ userName, password, type })}`);
 
   let userIdentity = {};
@@ -40,10 +52,15 @@ function password (userName, password, type) {
   return new Promise((resolve, reject) => {
 
     //Fake Association
-    if (userName === 'acy' && password === '1234') { userIdentity = identity['1']; } else
-    if (userName === 'cde' && password === '1234') { userIdentity = identity['2']; } else 
-    if (userName === 'spa' && password === '1234') { userIdentity = identity['3']; } else 
-    { 
+    if (userName === 'acy' && password === '1234' && type === 'b2bUser') {
+      userIdentity = identity['1'];
+    } else
+    if (userName === 'cde' && password === '1234') {
+      userIdentity = identity['2'];
+    } else
+    if (userName === 'spa' && password === '1234') {
+      userIdentity = identity['3'];
+    } else {
       return reject()
     };
     //Fake Association
@@ -61,19 +78,24 @@ function password (userName, password, type) {
  * @param {string} jwt 
  * @return {jwt}
  */
-function jwt (jwt, type) {
+function jwt(jwt, type) {
   console.log(`[HTTP]SECURITY::Service::Jwt::${JSON.stringify({ jwt, type })}`);
 
   let userIdentity = {};
 
   return new Promise((resolve, reject) => {
 
-    if(jwtService.verify(jwt)) {
+    if (jwtService.verify(jwt)) {
       //Fake Association
-      if (jwtService.verify(jwt).idIdentity === 1) { userIdentity = identity[1] } else
-      if (jwtService.verify(jwt).idIdentity === 2) { userIdentity = identity[2] } else
-      if (jwtService.verify(jwt).idIdentity === 3) { userIdentity = identity[3] } else
-      { 
+      if (jwtService.verify(jwt).idIdentity === 1) {
+        userIdentity = identity[1]
+      } else
+      if (jwtService.verify(jwt).idIdentity === 2) {
+        userIdentity = identity[2]
+      } else
+      if (jwtService.verify(jwt).idIdentity === 3) {
+        userIdentity = identity[3]
+      } else {
         return reject(grpcErrors.unauthorized);
       };
       //Fake Association
@@ -92,16 +114,21 @@ function jwt (jwt, type) {
  * @param {string} key 
  * @return {jwt}
  */
-function key (key) {
+function key(key) {
   console.log(`[HTTP]SECURITY::Service::Key::${JSON.stringify({ key })}`);
 
   let identity = {};
-  
+
   return new Promise((resolve, reject) => {
 
     //Fake Association
-    if(key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') { userIdentity = identity[3] } else
-    { 
+    if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') {
+      userIdentity = identity[3]
+    } else if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rtb') {
+      userIdentity = identity[4]
+    } else if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rtc') {
+      userIdentity = identity[5]
+    } else {
       return reject(grpcErrors.unauthorized);
     };
     //Fake Association

@@ -20,7 +20,7 @@ module.exports = function (req, res, next) {
                 console.log('gateway::', 'Identity validated, received short lived token', data);
 
                 if (data && data.slToken) {
-                    req.authorization = data;
+                    req.authorization = data.slToken;
                 }
 
                 return next();

@@ -1,36 +1,28 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
+const middlewares = require('./middlewares');
 const gatewayConfigurations = require('./models/gatewayConfigurations');
 
-const middlewares = require('./middlewares');
+global.Promise = require('bluebird');
 
-var gatewayMiddleware = require('./proxyMiddleware');
-
-var app = express();
+const app = express();
 
 require('./infrastructure/securityService/authenticationService').init();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-
 app.use(bearerToken());
 app.use(middlewares.gatewayConfigMiddleware);
 app.use(middlewares.authorizationMiddleware);
 
 gatewayConfigurations.forEach(x => app.use(x.originalUrl, middlewares.gatewayConfigurationProxyMiddleware(x)));
 
-// error handler
 app.use(function (err, req, res, next) {
   console.error(err);
   const status = err.status || 500;
-
-  // render the error page
   res.status(status)
     .json({
       status,

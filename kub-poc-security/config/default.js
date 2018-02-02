@@ -1,4 +1,5 @@
 const config = {
+  port: '8080',
   server: {
       name: 'authentication',
       ip:'0.0.0.0',

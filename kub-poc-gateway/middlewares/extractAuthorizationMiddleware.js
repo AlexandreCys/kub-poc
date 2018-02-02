@@ -54,7 +54,7 @@ module.exports = function (req, res, next) {
     const gatewayConfiguration = req.gatewayConfiguration;
     const authorizationToken = extractAuthorization(req, gatewayConfiguration);
 
-    console.log('gateway::', 'extracted token', authorizationToken);
+    console.log('gateway::', 'Extracted authorization token', authorizationToken);
 
     req.authorization = authorizationToken;
 

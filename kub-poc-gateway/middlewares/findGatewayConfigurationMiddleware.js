@@ -15,7 +15,7 @@ function findGatewayConfig(originalUrl) {
         throw error;
     }
 
-    console.log('gateway::', 'Found gateway configration for', originalUrl);
+    console.log('gateway::', 'Found gateway configuration for', originalUrl);
 
     return config;
 }

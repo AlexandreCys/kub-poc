@@ -22,14 +22,23 @@ function createClient(proto) {
   clientInstance = client;
 }
 
-function authenticateWithApiKey(apiKey) {
+function withApiKey(apiKey) {
   return clientInstance.key()
     .sendMessage({
       key: apiKey,
     });
 }
 
+function withJwtToken(jwtToken, authenticationMode) {
+  return clientInstance.jwt()
+    .sendMessage({
+      jwt: jwtToken,
+      type: authenticationMode,
+    });
+}
+
 module.exports = {
   init,
-  authenticateWithApiKey,
+  withApiKey,
+  withJwtToken,
 };

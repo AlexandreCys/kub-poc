@@ -1,6 +1,6 @@
 const config = {
   port: 8080,
-  service: {
+  services: {
     security: {
       add: 'kub-poc-security-service',
       port: {

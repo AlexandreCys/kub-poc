@@ -1,8 +1,9 @@
-const gatewayConfigurations = require('../models/gatewayConfigurations');
-
 const proxy = require('express-http-proxy');
 const urlUtils = require('url');
 const querystringUtils = require('querystring');
+
+const gatewayConfigurations = require('../models/gatewayConfigurations');
+const authenticationService = require('../infrastructure/securityService/authenticationService');
 
 function buildUrl(urlPathname, queryStrings, gatewayConfig) {
     let mappedPostfixUrl = gatewayConfig.to.postfix || '';
@@ -21,18 +22,24 @@ module.exports = function (gatewayConfiguration) {
     
     return proxy(`http://${gatewayConfiguration.to.service}:${gatewayConfiguration.to.port}`, {
         filter: function (req, res) {
-            console.log('gateway::', 'found proxy', gatewayConfiguration.originalUrl, '--->', req.originalUrl)
+            console.log('gateway::', 'Found proxy', gatewayConfiguration.originalUrl);
 
             return true;
         },
         proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-
-            // todo call security here
+            // Add authorization on request
+            if(srcReq.authorization){
+                proxyReqOpts.headers.Authorization = `Bearer ${srcReq.authorization}`;
+            }
 
             return proxyReqOpts;
         },
         proxyReqPathResolver(req) {
-            return buildUrl(urlUtils.parse(req.url).pathname, req.query, req.gatewayConfiguration);
+            const url = buildUrl(urlUtils.parse(req.url).pathname, req.query, req.gatewayConfiguration);
+
+            console.log('gateway::', 'Calling service', url);
+
+            return url
         }
     });
 }

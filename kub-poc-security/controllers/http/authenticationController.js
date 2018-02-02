@@ -7,13 +7,14 @@ router.get('/health', (req, res, next) => {
   return res.sendStatus(200);
 });
 
-router.post('/password', (req, res, next) => {
+router.post('/login', (req, res, next) => {
   console.log(`[HTTP]SECURITY::Controller::Password::${JSON.stringify(req.body)}`);
 
-  authenticationsServices.authenticationService.password(req.body.userName, req.body.password, req.body.type)
+  authenticationsServices.authenticationService.password(req.body.username, req.body.password, req.body.type)
   .then(token => 
     res.json({ token })
-  );
+  )
+  .catch(err => next(err));
 });
 
 module.exports = router;

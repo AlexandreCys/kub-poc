@@ -12,11 +12,15 @@ const app = express();
 require('./infrastructure/securityService/authenticationService').init();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(bearerToken());
-app.use(middlewares.gatewayConfigMiddleware);
-app.use(middlewares.authorizationMiddleware);
+
+app.use(middlewares.findGatewayConfigurationMiddleware);
+app.use(middlewares.extractAuthorizationMiddleware);
+app.use(middlewares.validateIdentityMiddleware);
 
 gatewayConfigurations.forEach(x => app.use(x.originalUrl, middlewares.gatewayConfigurationProxyMiddleware(x)));
 

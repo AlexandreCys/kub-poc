@@ -85,17 +85,12 @@ function jwt(jwt, type) {
 
   return new Promise((resolve, reject) => {
 
-    if (jwtService.verify(jwt)) {
+    if(jwtService.verify(jwt, type)) {
       //Fake Association
-      if (jwtService.verify(jwt).idIdentity === 1) {
-        userIdentity = identity[1]
-      } else
-      if (jwtService.verify(jwt).idIdentity === 2) {
-        userIdentity = identity[2]
-      } else
-      if (jwtService.verify(jwt).idIdentity === 3) {
-        userIdentity = identity[3]
-      } else {
+      if (jwtService.verify(jwt, type).idIdentity === 1) { userIdentity = Object.assign(identity['1'], type) } else
+      if (jwtService.verify(jwt, type).idIdentity === 2) { userIdentity = Object.assign(identity['2'], type) } else
+      if (jwtService.verify(jwt, type).idIdentity === 3) { userIdentity = Object.assign(identity['3'], type) } else
+      { 
         return reject(grpcErrors.unauthorized);
       };
       //Fake Association
@@ -122,13 +117,8 @@ function key(key) {
   return new Promise((resolve, reject) => {
 
     //Fake Association
-    if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') {
-      userIdentity = identity[3]
-    } else if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rtb') {
-      userIdentity = identity[4]
-    } else if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rtc') {
-      userIdentity = identity[5]
-    } else {
+    if(key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') { userIdentity = identity['3'] } else
+    { 
       return reject(grpcErrors.unauthorized);
     };
     //Fake Association

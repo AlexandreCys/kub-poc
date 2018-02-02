@@ -33,6 +33,7 @@ const conf = {
 function sign(data, userType) {
   const payload = {
     exp: moment.utc().add(conf[userType].val, conf[userType].uni).valueOf(),
+    idIdentity : data.idIdentity,
     permissions : data.permissions,
     partners : data.partners,
     isAdmin : data.isAdmin,
@@ -49,7 +50,7 @@ function sign(data, userType) {
  * @returns {boolean}
  */
 function verify(token, userType) {
-  return jwt.verify(token, keys.publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
+  return jwt.verify(token, conf[userType].publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
     if (err) { return false; }
 
     return decoded;

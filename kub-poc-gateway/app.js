@@ -4,11 +4,13 @@ const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
 const middlewares = require('./middlewares');
 const gatewayConfigurations = require('./models/gatewayConfigurations');
+const controllers = require('./controllers');
 
 global.Promise = require('bluebird');
 
 const app = express();
 
+// initialize grpc server
 require('./infrastructure/securityService/authenticationService').init();
 
 app.use(bodyParser.json());
@@ -18,9 +20,13 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(bearerToken());
 
+app.use('/', controllers);
+
 app.use(middlewares.findGatewayConfigurationMiddleware);
 app.use(middlewares.extractAuthorizationMiddleware);
 app.use(middlewares.validateIdentityMiddleware);
+
+
 
 gatewayConfigurations.forEach(x => app.use(x.originalUrl, middlewares.gatewayConfigurationProxyMiddleware(x)));
 

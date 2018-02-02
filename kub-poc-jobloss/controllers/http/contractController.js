@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const services = require('../../services');
 const middlewares = require('../../middlewares');
 
 const router = express.Router();
@@ -13,11 +14,8 @@ router.get('/be/contracts/:id/cancel',
   middlewares.permissionMiddleware([
     'jobloss.contract.delete'
   ]),
-  (req, res, next) => res.json({
-    'status': `CANCELED`,
-    'cancelType': 'user',
-    'contractId': req.params.id,
-  })
+  (req, res, next) => services.contractServices.contractService.cancel(req.params.id, req.user, 'user')
+  .then(response => res.json(response))
 );
 
 router.get('/admin/contracts/:id/cancel',  
@@ -25,11 +23,8 @@ router.get('/admin/contracts/:id/cancel',
   middlewares.permissionMiddleware([
     'jobloss.contract.delete'
   ]),
-  (req, res, next) => res.json({
-    'status': `CANCELED`,
-    'cancelType': 'admin',
-    'contractId': req.params.id,
-  })
+  (req, res, next) => services.contractServices.contractService.cancel(req.params.id, req.user, 'admin')
+  .then(response => res.json(response))
 );
 
 module.exports = router;

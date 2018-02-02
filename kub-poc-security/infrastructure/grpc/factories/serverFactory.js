@@ -2,7 +2,7 @@ const config = require('config');
 const grpc = require('grpc');
 
 function init() {
-  const server = config.server;
+  const server = config.get('server');
   const protoPath = __dirname + '/../../../contracts/' + server.protoPath;
   
   const proto = grpc.load(protoPath)[server.protoName];

@@ -13,11 +13,11 @@ function init() {
 
 function createClient(proto) {
   const serviceInstance = proto['Authentication']; // load service
-  const client = new serviceInstance(`${config.services.security.add}:${config.services.security.port.grpc}`, grpc.credentials.createInsecure());
+  const client = new serviceInstance(`${config.get('services.security.add')}:${config.get('services.security.port.grpc')}`, grpc.credentials.createInsecure());
 
   grpc_promise.promisifyAll(client);
 
-  console.log(`[gRPC]GATEWAY::ConnectedTo::SECURITY::(${config.services.security.add}:${config.services.security.port.grpc})`);
+  console.log(`[gRPC]GATEWAY::ConnectedTo::SECURITY::(${config.get('services.security.add')}:${config.get('services.security.port.grpc')})`);
 
   clientInstance = client;
 }

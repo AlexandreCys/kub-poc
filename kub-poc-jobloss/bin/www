@@ -14,7 +14,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(config.port || '8080');
+var port = normalizePort(config.get('port') || '8080');
 app.set('port', port);
 
 /**
@@ -88,5 +88,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  console.log(`[HTTP]JOBLOSS::ListenTo::(${config.port})`);
+  console.log(`[HTTP]JOBLOSS::ListenTo::(${config.get('port')})`);
 }

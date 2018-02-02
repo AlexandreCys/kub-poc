@@ -8,7 +8,7 @@ const ExtractJwt = passportJWT.ExtractJwt;
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
-  secretOrKey: fs.readFileSync(config.key.internal.public, "utf8"),
+  secretOrKey: fs.readFileSync(config.get('key.internal.public'), "utf8"),
 };
 
 const jwtPayloadJsonSchema = {

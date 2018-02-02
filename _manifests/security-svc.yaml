@@ -4,7 +4,11 @@ metadata:
   name: kub-poc-security-service
 spec:
   ports:
+    - port: 80
+      name: http
+      targetPort: 8080
     - port: 83
+      name: grpc
       targetPort: 8083
   selector:
     app: kub-poc-security

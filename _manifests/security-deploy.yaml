@@ -23,6 +23,7 @@ spec:
           mountPath: "/tmp/internal-key"
           readOnly: true
         ports:
+        - containerPort: 8080
         - containerPort: 8083
         livenessProbe:
           initialDelaySeconds: 2

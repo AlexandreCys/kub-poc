@@ -21,6 +21,7 @@ COPY ./ /usr/src/app
 
 ENV NODE_ENV test
 
+EXPOSE 8080
 EXPOSE 8083
 
 CMD [ "npm", "start" ]

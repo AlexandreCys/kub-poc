@@ -14,11 +14,11 @@ function password (userName, password, type) {
 
   return new Promise((resolve, reject) => {
 
-    //FAKE CHECK login/password
+    //FAKECHECK : login/password
     if(userName !== 'acy' || password !== '1234') {
       return reject(grpcErrors.unauthorized);
     }
-    //FAKE CHECK login/password
+    //FAKECHECK : login/password
 
     return resolve(jwtService.sign({
       permissions : [],
@@ -39,11 +39,11 @@ function jwt (jwt, type) {
 
   return new Promise((resolve, reject) => {
     
-    //FAKE CHECK jwt
+    //FAKECHECK : jwt
     if(jwt !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ') {
       return reject(grpcErrors.unauthorized);
     }
-    //FAKE CHECK jwt
+    //FAKECHECK : jwt
 
     return resolve(jwtService.sign({
       permissions : [],
@@ -64,11 +64,11 @@ function key (key) {
   
   return new Promise((resolve, reject) => {
     
-    //FAKE CHECK key
+    //FAKECHECK : key
     if(key !== 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') {
       return reject(grpcErrors.unauthorized);
     }
-    //FAKE CHECK jwt
+    //FAKECHECK : key
 
     return resolve(jwtService.sign({
       permissions : [],

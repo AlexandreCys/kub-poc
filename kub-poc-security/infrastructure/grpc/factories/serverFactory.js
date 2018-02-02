@@ -17,7 +17,7 @@ function createServer(serverData, proto) {
   server.addService(proto.Authentication.service, controller);
   server.bind(`${serverData.ip}:${serverData.port}`, grpc.ServerCredentials.createInsecure());
 
-  console.log(`SERVER LISTEN : ${serverData.ip}:${serverData.port}`);
+  console.log(`[gRPC]SECURITY::ListenTo::(${serverData.ip}:${serverData.port})`);
 
   server.start();
 }

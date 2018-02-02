@@ -13,16 +13,16 @@ const gatewayConfiguration = [
     {
         originalUrl: '/auth',
         to: {
-            service: config.service.security.add,
-            port: config.service.security.port.http,
+            service: config.services.security.add,
+            port: config.services.security.port.http,
         }
     },
     {
         originalUrl: '/be/jobloss',
         authenticationModes: [authenticationMode.apiKey, authenticationMode.b2bUser],
         to: {
-            service: config.service.jobloss.add,
-            port: config.service.jobloss.port.http,
+            service: config.services.jobloss.add,
+            port: config.services.jobloss.port.http,
             postfix: '/be'
         }
     },
@@ -30,8 +30,8 @@ const gatewayConfiguration = [
         originalUrl: '/admin/jobloss',
         authenticationModes: [authenticationMode.adminUser],
         to: {
-            service: config.service.jobloss.add,
-            port: config.service.jobloss.port.http,
+            service: config.services.jobloss.add,
+            port: config.services.jobloss.port.http,
             postfix: '/admin'
         }
     }

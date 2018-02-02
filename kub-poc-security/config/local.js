@@ -1,9 +1,9 @@
 const config = {
-  port: '7070',
+  port: '8181',
   server: {
       name: 'authentication',
       ip:'0.0.0.0',
-      port: '8083',
+      port: '9191',
       protoName: 'authentication',
       protoPath: 'authentication.proto',
   },

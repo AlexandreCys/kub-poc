@@ -1,34 +1,24 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
+const gatewayMiddleware = require('./gatewayMiddleware');
 
-var gatewayMiddleware = require('./gatewayMiddleware');
+global.Promise = require('bluebird');
 
-var app = express();
+const app = express();
 
 require('./infrastructure/securityService/authenticationService').init();
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-
 app.use(bearerToken());
-
 app.use(gatewayMiddleware);
 
-// error handler
 app.use(function (err, req, res, next) {
   console.error(err);
   const status = err.status || 500;
-
-  // render the error page
   res.status(status)
     .json({
       status,

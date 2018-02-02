@@ -1,18 +1,17 @@
 const config = {
   port: 8080,
-  service: {
+  services: {
     security: {
       add: '0.0.0.0',
       port: {
-        http: '7070',
-        grpc: '8083',
+        http: '8181',
+        grpc: '9191',
       },
     },
     jobloss: {
       add: '0.0.0.0',
       port: {
-        http: '6060',
-        grpc: '8084',
+        http: '8282',
       },
     },
   },

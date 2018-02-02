@@ -18,13 +18,13 @@ spec:
           readOnly: true
         ports:
         - containerPort: 8080
-        volumes:
-        - name: internal-key
-          secret:
-            secretName: internal-key
         livenessProbe:
           initialDelaySeconds: 2
           periodSeconds: 5
           httpGet:
             path: /health
             port: 8080
+      volumes:
+      - name: internal-key
+        secret:
+          secretName: internal-key

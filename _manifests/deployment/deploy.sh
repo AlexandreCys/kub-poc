@@ -81,7 +81,7 @@ if [ "$CONT" = "y" ]; then
   echo -e "\e[36m⚙ Begin kubectl create secrets \e[39m"
   kubectl create -f $ADMIN_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
   kubectl create -f $B2B_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
-  kubectl create -f INTERNAL_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
+  kubectl create -f $INTERNAL_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
 
   # KubeCtl create all deploy
   echo -e "\e[36m⚙ Begin kubectm create all deploy \e[39m"

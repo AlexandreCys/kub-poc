@@ -2,17 +2,16 @@
   "port": 8080,
   "services": {
     "security": {
-      "add": "kub-poc-security-service",
+      "add": "0.0.0.0",
       "port": {
-        "http": "80",
-        "grpc": "83"
+        "http": "8181",
+        "grpc": "9191"
       }
     },
     "jobloss": {
-      "add": "kub-poc-jobloss-service",
+      "add": "0.0.0.0",
       "port": {
-        "http": "80",
-        "grpc": "83"
+        "http": "8282"
       }
     }
   }

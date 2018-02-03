@@ -1,8 +1,4 @@
 platform: linux
-inputs:
-- name: build-docker-poc-k8s
-outputs:
-- name: done
 image_resource:
   type: docker-image
   source:

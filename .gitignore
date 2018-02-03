@@ -59,4 +59,4 @@ typings/
 .env
 
 # concourse credential
-credentials.yaml
+_manifests/concourse/credentials.yaml

@@ -5,7 +5,7 @@ image_resource:
     repository: lachlanevenson/k8s-kubectl
     tag: "latest"
 run:
-  path: bash
+  path: /bin/bash
   args:
   - -exc
   - |

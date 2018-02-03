@@ -1,6 +1,6 @@
 platform: linux
 inputs:
-- name: continuous-deployment-on-kubernetes
+- name: deploy
 outputs:
 - name: deploy
 image_resource:

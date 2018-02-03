@@ -22,7 +22,7 @@ resources:
   type: git
   source:
     uri: {{github-url}}
-    branch: master
+    branch: concourse
 
 - name: docker-image
   type: docker-image

@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: kub-poc-gateway
-        image: k8s/kub-poc-gateway:v<VERSION>
+        image: qover/kub-poc-gateway
         ports:
         - containerPort: 8080
         livenessProbe:

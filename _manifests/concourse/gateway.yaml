@@ -1,0 +1,33 @@
+jobs:  
+- name: build-docker-poc-k8s
+  public: true
+  serial: true
+  plan:
+  - get: git-poc-k8s
+    trigger: true
+  - put: docker-image
+    params:
+      build: git-poc-k8s/kub-poc-gateway
+- name: deploy-docker-poc-k8s
+  public: true
+  serial: true
+  plan:
+  - get: git-poc-k8s
+    trigger: true
+  - task: deploy
+    file: _manifests/concourse/tasks/deploy.yaml
+
+resources:  
+- name: git-poc-k8s
+  type: git
+  source:
+    uri: {{github-url}}
+    branch: master
+
+- name: docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-gateway-repository}}

@@ -1,8 +1,8 @@
 platform: linux
 inputs:
-- name: deploy
+- name: build-docker-poc-k8s
 outputs:
-- name: deploy
+- name: done
 image_resource:
   type: docker-image
   source:
@@ -13,4 +13,5 @@ run:
   args:
   - -exc
   - |
+    kubectl config set-cluster test-cluster --server=http://192.168.99.100:30000 --api-version=v1
     kubectl --namespace=k8s apply -f _manifests/gateway-deploy.yaml

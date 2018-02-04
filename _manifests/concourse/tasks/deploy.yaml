@@ -13,4 +13,5 @@ run:
     kubectl config set-context local-context --cluster=local-cluster
     kubectl config use-context local-context
     kubectl cluster-info --namespace=k8s
+    kubectl get deployment --namespace=k8s
     kubectl --namespace=k8s apply -f git-poc-k8s/_manifests/gateway-deploy.yaml

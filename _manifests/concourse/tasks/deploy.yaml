@@ -10,4 +10,5 @@ run:
   - -exc
   - |
     kubectl config set-cluster local-cluster --server=http://ae04df29.ngrok.io:30000
+    kubectl config use-context local-cluster
     kubectl --namespace=k8s apply -f _manifests/gateway-deploy.yaml

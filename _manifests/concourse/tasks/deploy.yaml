@@ -9,8 +9,9 @@ run:
   args:
   - -exc
   - |
-    kubectl config set-cluster local-cluster --server=https://192.168.99.100:8443
-    kubectl config set-context local-context --cluster=local-cluster
+    kubectl config set-credentials acy --username=acy --password=************
+    kubectl config set-cluster local-cluster --server=https://192.168.99.100:8443 --insecure-skip-tls-verify=true 
+    kubectl config set-context local-context --cluster=local-cluster --user=acy
     kubectl config use-context local-context
     kubectl cluster-info --namespace=k8s
     kubectl get deployment --namespace=k8s

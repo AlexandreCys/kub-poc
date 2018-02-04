@@ -9,5 +9,5 @@ run:
   args:
   - -exc
   - |
-    kubectl config set-cluster test-cluster --server=http://ae04df29.ngrok.io:30000 --api-version=v1
+    kubectl config set-cluster local-cluster --server=http://ae04df29.ngrok.io:30000
     kubectl --namespace=k8s apply -f _manifests/gateway-deploy.yaml

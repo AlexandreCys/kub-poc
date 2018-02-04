@@ -9,7 +9,7 @@ run:
   args:
   - -exc
   - |
-    kubectl config set-cluster local-cluster --server=http://050c1a8f.ngrok.io --insecure-skip-tls-verify=true
+    kubectl config set-cluster local-cluster --server=192.168.99.100:8443 --insecure-skip-tls-verify=true
     kubectl config set-context local-context --cluster=local-cluster
     kubectl config use-context local-context
     kubectl cluster-info --namespace=k8s

@@ -12,27 +12,33 @@ const identity = {
   2: {
     idIdentity: 2,
     permissions: ['jobloss.contract.delete'],
-    partners: ['*'],
+    partners: [1],
     isAdmin: true,
   },
   3: {
     idIdentity: 3,
-    permissions: [],
+    permissions: ['jobloss.contract.delete'],
     partners: [1],
     isAdmin: true,
   },
   4: {
     idIdentity: 4,
-    permissions: ['jobloss.contract.delete'],
+    permissions: [],
     partners: [1],
-    isAdmin: true,
+    isAdmin: false,
   },
   5: {
     idIdentity: 5,
-    permissions: ['jobloss.contract.delete'],
-    partners: [2],
+    permissions: [],
+    partners: [1],
     isAdmin: true,
   },
+  6: {
+    idIdentity: 6,
+    permissions: [],
+    partners: [1],
+    isAdmin: true,
+  }
 }
 
 /**
@@ -52,14 +58,18 @@ function password(userName, password, type) {
   return new Promise((resolve, reject) => {
 
     //Fake Association
-    if (userName === 'acy' && password === '1234' && type === 'b2bUser') {
-      userIdentity = identity['1'];
-    } else
-    if (userName === 'cde' && password === '1234') {
-      userIdentity = identity['2'];
-    } else
-    if (userName === 'spa' && password === '1234') {
-      userIdentity = identity['3'];
+    if (userName === 'acy' && type === 'b2bUser') {
+      if (password === '1234') {
+        userIdentity = identity['1'];
+      } else if (password === '4321') {
+        userIdentity = identity['4'];
+      }
+    } else if (userName === 'cde' && type === 'adminUser') {
+      if (password === '1234') {
+        userIdentity = identity['2'];
+      } else if (password === '4321') {
+        userIdentity = identity['5'];
+      }
     } else {
       return reject()
     };
@@ -85,12 +95,17 @@ function jwt(jwt, type) {
 
   return new Promise((resolve, reject) => {
 
-    if(jwtService.verify(jwt, type)) {
+    if (jwtService.verify(jwt, type)) {
       //Fake Association
-      if (jwtService.verify(jwt, type).idIdentity === 1) { userIdentity = Object.assign(identity['1'], type) } else
-      if (jwtService.verify(jwt, type).idIdentity === 2) { userIdentity = Object.assign(identity['2'], type) } else
-      if (jwtService.verify(jwt, type).idIdentity === 3) { userIdentity = Object.assign(identity['3'], type) } else
-      { 
+      if (jwtService.verify(jwt, type).idIdentity === 1) {
+        userIdentity = Object.assign(identity['1'], type)
+      } else if (jwtService.verify(jwt, type).idIdentity === 2) {
+        userIdentity = Object.assign(identity['2'], type)
+      } else if (jwtService.verify(jwt, type).idIdentity === 3) {
+        userIdentity = Object.assign(identity['3'], type)
+      } else if (jwtService.verify(jwt, type).idIdentity === 4) {
+        userIdentity = Object.assign(identity['4'], type)
+      } else {
         return reject(grpcErrors.unauthorized);
       };
       //Fake Association
@@ -112,13 +127,16 @@ function jwt(jwt, type) {
 function key(key) {
   console.log(`[HTTP]SECURITY::Service::Key::${JSON.stringify({ key })}`);
 
-  let identity = {};
+  let userIdentity = {};
 
   return new Promise((resolve, reject) => {
 
     //Fake Association
-    if(key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') { userIdentity = identity['3'] } else
-    { 
+    if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rta') {
+      userIdentity = identity['3']
+    } else if (key === 'm9Jaa91fes21MbwPSe3cshAcPQY62rtb') {
+      userIdentity = identity['6']
+    } else {
       return reject(grpcErrors.unauthorized);
     };
     //Fake Association

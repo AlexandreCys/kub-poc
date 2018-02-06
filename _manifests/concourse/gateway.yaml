@@ -8,7 +8,7 @@ jobs:
   - put: docker-image
     params:
       build: git-poc-k8s/kub-poc-gateway
-- name: deploy-docker-poc-k8s
+- name: deploy-deployments-poc-k8s
   public: true
   serial: true
   plan:
@@ -16,11 +16,20 @@ jobs:
     trigger: true
   - get: git-poc-k8s
   - task: deploy
-    file: git-poc-k8s/_manifests/concourse/tasks/deploy.yaml
+    file: git-poc-k8s/_manifests/concourse/tasks/deployments.yaml
     params:
       git-poc-k8s: git-poc-k8s
-      client-key-data: {{client-key-data}}
-      client-certificate-data: {{client-certificate-data}}
+- name: deploy-services-poc-k8s
+  public: true
+  serial: true
+  plan:
+  - get: docker-image
+    trigger: true
+  - get: git-poc-k8s
+  - task: deploy
+    file: git-poc-k8s/_manifests/concourse/tasks/services.yaml
+    params:
+      git-poc-k8s: git-poc-k8s
 
 resources:  
 - name: git-poc-k8s

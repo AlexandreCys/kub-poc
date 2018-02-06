@@ -1,0 +1,67 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: lachlanevenson/k8s-kubectl
+    tag: "latest"
+
+inputs:
+  - name: git-poc-k8s
+
+run:
+  path: sh
+  args:
+  - -exc
+  - |
+    echo '-----BEGIN CERTIFICATE-----
+    MIICzjCCAbagAwIBAgIIZD9ao924kqEwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
+    AxMKa3ViZXJuZXRlczAeFw0xODAyMDYxMDM3MDRaFw0xOTAyMDYxMDM4NDRaMBAx
+    DjAMBgNVBAMTBWFkbWluMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+    tXBRO178EL58EPmFhbXHco88vID/lgYaYrghOPRwfXZVHxBR+TGSr6ViJ+eQioVj
+    ywDtw2SaLK65POj3LSs4Hk9EapJrzIwWfTETHXkuiLn1nDceAlgxLj8e7QL6pkXb
+    1jSIBqE8f+hWg7N0nFGBWToBlhK9ilvCJC8p1jWf1SOAKoac4MXnWWBy1hMC7N0y
+    UrZLz641eiPYzLtkUgQlTA617/OXn0UuuKT77vuOpKsiec5Qg507iMiae0RF6Th9
+    +XO/siFXKkypGZy/rRjwEHM+3v8DnAKLuIKHyS7OiX8K7n8dY+AgH2bJosG/xBLR
+    GRm0Nm5MsJl+6LDmqWXD9QIDAQABoycwJTAOBgNVHQ8BAf8EBAMCBaAwEwYDVR0l
+    BAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQELBQADggEBAC/qigAdaKqvDz/7vCvD
+    yjmUH9whIQ1qkXkI0dA7sRqCvWN8IZf/Al59IFK7IMFFrT/ZYxNdiefaj/+F4/Lj
+    BBv4DSbCOChpHOUP059fzN1aohUrh6pBMyvtSZQ2StV70zlI1xNJwaxMw5SfDS7e
+    b+MLys/Wmh98NM+TLpM2KcyGVO0yq1W1p60M3827Prii2ZLJHFaYQx+RMHgtgaDL
+    HovqgsmvD3NjIbQBnbf4Vq140JhiNrYMFcpKg0XamVvlWqwJSJtKBxGfHvQJSCOS
+    IZT5ZcvzDq16w89F76jDuld/Uw/ISx2XDGal7YF0BGrD75xCW6KKiaSyQ0YmDoyX
+    ouc=
+    -----END CERTIFICATE-----' > /tmp/client-certificate.pem
+    echo '-----BEGIN RSA PRIVATE KEY-----
+    MIIEpAIBAAKCAQEAtXBRO178EL58EPmFhbXHco88vID/lgYaYrghOPRwfXZVHxBR
+    +TGSr6ViJ+eQioVjywDtw2SaLK65POj3LSs4Hk9EapJrzIwWfTETHXkuiLn1nDce
+    AlgxLj8e7QL6pkXb1jSIBqE8f+hWg7N0nFGBWToBlhK9ilvCJC8p1jWf1SOAKoac
+    4MXnWWBy1hMC7N0yUrZLz641eiPYzLtkUgQlTA617/OXn0UuuKT77vuOpKsiec5Q
+    g507iMiae0RF6Th9+XO/siFXKkypGZy/rRjwEHM+3v8DnAKLuIKHyS7OiX8K7n8d
+    Y+AgH2bJosG/xBLRGRm0Nm5MsJl+6LDmqWXD9QIDAQABAoIBAQCQtYo0XieQezyc
+    lUanRDpU5mU8u24eC7QTtGPa9yqZBj4RzoRyydUCfldxGEGyGX1kNdNsmdpVdO2M
+    5QnvXp8dnX8luK59r+Vn6DIkubghmJ+J/nPSzuA60GEsC8o5v1H84Fz1XLfSFE6c
+    MA77dg5CSf9l4ICHz3NiRLOLg6184cGYCrBEGaJadyKX7pSLq2iUxo9IWKqApZ5z
+    ggQAiUXhlo955TiuS62ejip4TC/XIenW+g9UlxdVs3ByX2TVUlRzStb0H6BdcQSB
+    13NQ7CwTc/Ml5nX4KlVhyCKAK5qzbZlNr2EX4EBV7cKaT88pfrhLDCJSW18I3i5T
+    0N7R83opAoGBAM9z8Gdp2j5c8WXWDFHbohAGyUY4ctc0WwtSQIVv07sk1fdnYh70
+    59JokD00nKYMxu3Yy3yiPX54T/oITFV/XJhNwLGQWil1BCqq4lR59LW0H6VcRk2p
+    zimJD6QtBJw37ZR7Jo9zR64nxPyeouy/+zPkekz+lkaEFxBDHS69VT/TAoGBAN/l
+    7Q/s07VY5OIK4iShhpN69RBA3fdJykG7tt6Et1fA4NYKOaJWR7aiUsiM6FX7D2hp
+    jPMYQ8X5Y8MWD5lAYUfhUoV5HCt/vD6/xlB59EZuJ2P65uLpyfq/GWDZ5O4FUfdN
+    JpW4j1CfjWKFdJgt1yH43AeEBfoQ0nGxcWwIsdgXAoGAAlrml8Xz3FFhzC4p5aQA
+    qv3ouwtZAmhtwCsm4FzsomtAopZh3sgY+aKGQKugO6JZf8m+RaPx3sWu4r/FXhMc
+    Ef6P+XQSEfZqHbHi7+KSjJ2G3nG1upv64y3TJ6H7M2rPH6hmP6qnXarF6bhDUTy8
+    tVIasVUSj6pgOKcKZcVwelECgYEAm6VkGlkBh6TnYDg+o0Zinm2wpP7jD0CNyQps
+    gt3x8qAT7Neo3zBppA3NzLsf3H2uZWBS6r9ohdzrvDe+2kOGHQkHa+AYdCjVPS3l
+    +BX/eWKkIX3POdlaXuSwCMMQwWKTa36Hnzdw8ZQpHl82AYCEeIpesx7VZNSC5yR6
+    e6bDszsCgYAhNF54vDMTeXriXg8kFJxjXZYw3hGZY473RiiAOQNqvg2t9C5ni6tW
+    Ej1OeMMRqBPSQnH1PN2zlCNjqqk8NoYFdFTUbVWdttS3Sh8mEx3PLx2nK3StkXiV
+    CS+r0I267uYx1vVE4sbmuLEr3erVGgAd7aPo28hirAcxEjhUzVVLNQ==
+    -----END RSA PRIVATE KEY-----' > /tmp/client-key.pem
+    kubectl config set-credentials admin --username=admin --client-certificate=/tmp/client-certificate.pem --client-key=/tmp/client-key.pem
+    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --insecure-skip-tls-verify=true
+    kubectl config set-context admin@kubernetes --cluster=kubernetes --user=admin
+    kubectl config use-context admin@kubernetes
+    kubectl cluster-info
+    kubectl get deployments
+    kubectl apply -f git-poc-k8s/_manifests/gateway-deploy.yaml

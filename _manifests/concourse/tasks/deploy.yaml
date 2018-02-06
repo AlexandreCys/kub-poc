@@ -30,7 +30,7 @@ ouc=
 -----END CERTIFICATE-----
   EOF
   cat > /tmp/client-key-data.pem <<- "EOF"
-    echo "-----BEGIN RSA PRIVATE KEY-----
+-----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEAtXBRO178EL58EPmFhbXHco88vID/lgYaYrghOPRwfXZVHxBR
 +TGSr6ViJ+eQioVjywDtw2SaLK65POj3LSs4Hk9EapJrzIwWfTETHXkuiLn1nDce
 AlgxLj8e7QL6pkXb1jSIBqE8f+hWg7N0nFGBWToBlhK9ilvCJC8p1jWf1SOAKoac

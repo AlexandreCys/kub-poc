@@ -4,6 +4,10 @@ image_resource:
   source:
     repository: lachlanevenson/k8s-kubectl
     tag: "latest"
+
+inputs:
+  - name: git-poc-k8s
+
 run:
   path: sh
   args:

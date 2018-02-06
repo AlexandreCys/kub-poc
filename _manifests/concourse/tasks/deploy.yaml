@@ -4,10 +4,6 @@ image_resource:
   source:
     repository: lachlanevenson/k8s-kubectl
     tag: "latest"
-
-params:
-  deployment-file:
-
 run:
   path: sh
   args:
@@ -64,4 +60,4 @@ run:
     kubectl config use-context admin@kubernetes
     kubectl cluster-info
     kubectl get deployments
-    kubectl apply -f {{deployment-file}}
+    kubectl apply -f git-poc-k8s/_manifests/gateway-deploy.yaml

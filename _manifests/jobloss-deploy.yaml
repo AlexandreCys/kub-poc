@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: kub-poc-jobloss
-        image: k8s/kub-poc-jobloss:v<VERSION>
+        image: qover/kub-poc-jobloss
         volumeMounts:
         - name: internal-key
           mountPath: "/tmp/internal-key"

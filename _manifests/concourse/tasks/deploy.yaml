@@ -9,7 +9,7 @@ run:
   args:
   - -exc
   - |
-  cat > /tmp/client-certificate-data.pem <<- "EOF"
+  cat > /tmp/client-certificate-data.pem <<- EOF
 -----BEGIN CERTIFICATE-----
 MIICzjCCAbagAwIBAgIIZD9ao924kqEwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
 AxMKa3ViZXJuZXRlczAeFw0xODAyMDYxMDM3MDRaFw0xOTAyMDYxMDM4NDRaMBAx
@@ -29,7 +29,7 @@ IZT5ZcvzDq16w89F76jDuld/Uw/ISx2XDGal7YF0BGrD75xCW6KKiaSyQ0YmDoyX
 ouc=
 -----END CERTIFICATE-----
   EOF
-  cat > /tmp/client-key-data.pem <<- "EOF"
+  cat > /tmp/client-key-data.pem <<- EOF
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEAtXBRO178EL58EPmFhbXHco88vID/lgYaYrghOPRwfXZVHxBR
 +TGSr6ViJ+eQioVjywDtw2SaLK65POj3LSs4Hk9EapJrzIwWfTETHXkuiLn1nDce
@@ -58,8 +58,8 @@ Ej1OeMMRqBPSQnH1PN2zlCNjqqk8NoYFdFTUbVWdttS3Sh8mEx3PLx2nK3StkXiV
 CS+r0I267uYx1vVE4sbmuLEr3erVGgAd7aPo28hirAcxEjhUzVVLNQ==
 -----END RSA PRIVATE KEY-----
     EOF
-    kubectl config set-credentials admin --username=admin --client-certificate=/tmp/client-certificate-data.pem --client-key=/tmp/client-key-data
-    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --certificate-authority=/tmp/client-certificate-data.pem 
+    kubectl config set-credentials admin --username=admin --client-certificate={{client-certificate-data}} --client-key={{client-key-data}}
+    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --certificate-authority={{certificate-authority-data}}
     kubectl config set-context admin@kubernetes --cluster=kubernetes --user=admin
     kubectl config use-context admin@kubernetes
     kubectl cluster-info

@@ -55,7 +55,7 @@ run:
     CS+r0I267uYx1vVE4sbmuLEr3erVGgAd7aPo28hirAcxEjhUzVVLNQ==
     -----END RSA PRIVATE KEY-----' > /tmp/client-key.pem
     kubectl config set-credentials admin --username=admin --client-certificate=/tmp/client-certificate.pem --client-key=/tmp/client-key.pem
-    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --certificate-authority=/tmp/client-certificate.pem
+    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --insecure-skip-tls-verify=true
     kubectl config set-context admin@kubernetes --cluster=kubernetes --user=admin
     kubectl config use-context admin@kubernetes
     kubectl cluster-info

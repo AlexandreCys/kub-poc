@@ -23,8 +23,6 @@ jobs:
   public: true
   serial: true
   plan:
-  - get: docker-image
-    trigger: true
   - get: git-poc-k8s
   - task: deploy
     file: git-poc-k8s/_manifests/concourse/tasks/services.yaml

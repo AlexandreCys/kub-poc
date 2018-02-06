@@ -9,7 +9,8 @@ run:
   args:
   - -exc
   - |
-    echo "-----BEGIN CERTIFICATE-----
+  cat > /tmp/client-certificate-data.pem <<- "EOF"
+-----BEGIN CERTIFICATE-----
 MIICzjCCAbagAwIBAgIIZD9ao924kqEwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
 AxMKa3ViZXJuZXRlczAeFw0xODAyMDYxMDM3MDRaFw0xOTAyMDYxMDM4NDRaMBAx
 DjAMBgNVBAMTBWFkbWluMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
@@ -26,7 +27,9 @@ b+MLys/Wmh98NM+TLpM2KcyGVO0yq1W1p60M3827Prii2ZLJHFaYQx+RMHgtgaDL
 HovqgsmvD3NjIbQBnbf4Vq140JhiNrYMFcpKg0XamVvlWqwJSJtKBxGfHvQJSCOS
 IZT5ZcvzDq16w89F76jDuld/Uw/ISx2XDGal7YF0BGrD75xCW6KKiaSyQ0YmDoyX
 ouc=
------END CERTIFICATE-----" > /tmp/client-certificate-data.pem
+-----END CERTIFICATE-----
+  EOF
+  cat > /tmp/client-key-data.pem <<- "EOF"
     echo "-----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEAtXBRO178EL58EPmFhbXHco88vID/lgYaYrghOPRwfXZVHxBR
 +TGSr6ViJ+eQioVjywDtw2SaLK65POj3LSs4Hk9EapJrzIwWfTETHXkuiLn1nDce
@@ -53,7 +56,8 @@ gt3x8qAT7Neo3zBppA3NzLsf3H2uZWBS6r9ohdzrvDe+2kOGHQkHa+AYdCjVPS3l
 e6bDszsCgYAhNF54vDMTeXriXg8kFJxjXZYw3hGZY473RiiAOQNqvg2t9C5ni6tW
 Ej1OeMMRqBPSQnH1PN2zlCNjqqk8NoYFdFTUbVWdttS3Sh8mEx3PLx2nK3StkXiV
 CS+r0I267uYx1vVE4sbmuLEr3erVGgAd7aPo28hirAcxEjhUzVVLNQ==
------END RSA PRIVATE KEY-----" > /tmp/client-key-data.pem
+-----END RSA PRIVATE KEY-----
+    EOF
     kubectl config set-credentials admin --username=admin --client-certificate=/tmp/client-certificate-data.pem --client-key=/tmp/client-key-data
     kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --certificate-authority=/tmp/client-certificate-data.pem 
     kubectl config set-context admin@kubernetes --cluster=kubernetes --user=admin

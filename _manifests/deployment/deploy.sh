@@ -25,7 +25,7 @@ else
     exit 1
 fi
 
-K8S_NAMESPACE=k8s
+K8S_NAMESPACE=default
 
 DEPLOY_GATEWAY_NAME=k8s/kub-poc-gateway:v$VERSION
 DEPLOY_PRODUCT_NAME=k8s/kub-poc-jobloss:v$VERSION

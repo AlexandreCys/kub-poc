@@ -13,12 +13,12 @@ jobs:
   serial: true
   plan:
   - get: git-poc-k8s
-    passed: [build-docker-poc-k8s] 
+    passed: [build-docker-poc-k8s]
     trigger: true
   - task: deploy
-    file: git-poc-k8s/_manifests/concourse/tasks/deployments.yaml
+    file: git-poc-k8s/_manifests/concourse/tasks/security-deployment.yaml
     params:
-      git-poc-k8s-file: git-poc-k8s/_manifests/security-deploy.yaml
+      git-poc-k8s: git-poc-k8s
 - name: apply-services-poc-k8s
   public: true
   serial: true
@@ -27,9 +27,9 @@ jobs:
     passed: [apply-deployments-poc-k8s]
     trigger: true
   - task: deploy
-    file: git-poc-k8s/_manifests/concourse/tasks/services.yaml
+    file: git-poc-k8s/_manifests/concourse/tasks/security-service.yaml
     params:
-      git-poc-k8s-file: git-poc-k8s/_manifests/security-svc.yaml
+      git-poc-k8s: git-poc-k8s
 
 resources:  
 - name: git-poc-k8s

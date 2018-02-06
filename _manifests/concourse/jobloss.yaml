@@ -16,9 +16,9 @@ jobs:
     passed: [build-docker-poc-k8s]
     trigger: true
   - task: deploy
-    file: git-poc-k8s/_manifests/concourse/tasks/deployments.yaml
-    input_mapping:
-      git-poc-k8s-file: git-poc-k8s/_manifests/jobloss-deploy.yaml
+    file: git-poc-k8s/_manifests/concourse/tasks/jobloss-deployment.yaml
+    params:
+      git-poc-k8s: git-poc-k8s
 - name: apply-services-poc-k8s
   public: true
   serial: true
@@ -27,9 +27,9 @@ jobs:
     passed: [apply-deployments-poc-k8s]
     trigger: true
   - task: deploy
-    file: git-poc-k8s/_manifests/concourse/tasks/services.yaml
+    file: git-poc-k8s/_manifests/concourse/tasks/jobloss-service.yaml
     params:
-      git-poc-k8s-file: git-poc-k8s/_manifests/jobloss-svc.yaml
+      git-poc-k8s: git-poc-k8s
 
 resources:  
 - name: git-poc-k8s

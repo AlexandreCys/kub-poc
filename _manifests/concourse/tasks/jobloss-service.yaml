@@ -6,7 +6,7 @@ image_resource:
     tag: "latest"
 
 inputs:
-  - name: git-poc-k8s-file
+  - name: git-poc-k8s
 
 run:
   path: sh
@@ -63,5 +63,5 @@ run:
     kubectl config set-context admin@kubernetes --cluster=kubernetes --user=admin
     kubectl config use-context admin@kubernetes
     kubectl cluster-info
-    kubectl get deployments
-    kubectl apply -f git-poc-k8s-file
+    kubectl get services
+    kubectl apply -f git-poc-k8s/_manifests/gateway-svc.yaml

@@ -9,10 +9,10 @@ run:
   args:
   - -exc
   - |
-    kubectl config set-credentials acy --username=acy --password=************
-    kubectl config set-cluster local-cluster --server=https://192.168.99.100:8443 --insecure-skip-tls-verify=true 
-    kubectl config set-context local-context --cluster=local-cluster --user=acy
-    kubectl config use-context local-context
-    kubectl cluster-info --namespace=k8s
-    kubectl get deployment --namespace=k8s
-    kubectl --namespace=k8s apply -f git-poc-k8s/_manifests/gateway-deploy.yaml
+    kubectl config set-credentials admin --username=admin --client-certificate-data={{client-certificate-data}} --client-key-data={{client-key-data}}
+    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com
+    kubectl config set-context admin@kubernetes --cluster=kubernetes --certificate-authority-data={{certificate-authority-data}}
+    kubectl config use-context admin@kubernetes
+    kubectl cluster-info
+    kubectl get deployments
+    kubectl apply -f git-poc-k8s/_manifests/gateway-deploy.yaml

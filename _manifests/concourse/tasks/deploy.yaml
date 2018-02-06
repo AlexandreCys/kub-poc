@@ -9,8 +9,10 @@ run:
   args:
   - -exc
   - |
-    kubectl config set-credentials admin --username=admin --client-certificate={{client-certificate-data}} --client-key={{client-key-data}}
-    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --certificate-authority={{certificate-authority-data}}
+    echo {{client-certificate-data}} > /tmp/client-certificate-data
+    echo {{client-key-data}} > /tmp/client-key-data
+    kubectl config set-credentials admin --username=admin --client-certificate=/tmp/client-certificate-data --client-key=/tmp/client-key-data
+    kubectl config set-cluster kubernetes --server=https://heptio-ku-apiloadb-q15tabanakti-878813041.eu-central-1.elb.amazonaws.com --certificate-authority=/tmp/client-certificate-data
     kubectl config set-context admin@kubernetes --cluster=kubernetes --user=admin
     kubectl config use-context admin@kubernetes
     kubectl cluster-info

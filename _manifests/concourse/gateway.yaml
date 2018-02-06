@@ -19,6 +19,8 @@ jobs:
     file: git-poc-k8s/_manifests/concourse/tasks/deploy.yaml
     input_mapping:
       git-poc-k8s: git-poc-k8s
+      client-key-data: {{client-key-data}}
+      client-certificate-data: {{client-certificate-data}}
 
 resources:  
 - name: git-poc-k8s

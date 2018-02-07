@@ -84,7 +84,7 @@ if [ "$CONT" = "y" ]; then
   kubectl create -f $INTERNAL_TOKEN_LOCATION --namespace=$K8S_NAMESPACE 
 
   # KubeCtl create all deploy
-  echo -e "\e[36m⚙ Begin kubectm create all deploy \e[39m"
+  echo -e "\e[36m⚙ Begin kubectl create all deploy \e[39m"
   sed "s/<VERSION>/$VERSION/" ../gateway-deploy.yaml > /tmp/gateway-deploy.yaml
   kubectl create -f /tmp/gateway-deploy.yaml --namespace=$K8S_NAMESPACE
 

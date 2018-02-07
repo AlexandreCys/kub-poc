@@ -8,12 +8,23 @@ jobs:
   - put: docker-image
     params:
       build: git-poc-k8s/kub-poc-jobloss
-- name: apply-deployments-poc-k8s
+- name: apply-secrets-poc-k8s
   public: true
   serial: true
   plan:
   - get: git-poc-k8s
     passed: [build-docker-poc-k8s]
+    trigger: true
+  - task: deploy
+    file: git-poc-k8s/_manifests/concourse/tasks/jobloss-secret.yaml
+    params:
+      git-poc-k8s: git-poc-k8s
+- name: apply-deployments-poc-k8s
+  public: true
+  serial: true
+  plan:
+  - get: git-poc-k8s
+    passed: [apply-secrets-poc-k8s]
     trigger: true
   - task: deploy
     file: git-poc-k8s/_manifests/concourse/tasks/jobloss-deployment.yaml
